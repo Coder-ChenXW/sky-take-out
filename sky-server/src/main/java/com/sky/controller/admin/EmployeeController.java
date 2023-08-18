@@ -13,6 +13,7 @@ import com.sky.utils.JwtUtil;
 import com.sky.vo.EmployeeLoginVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.models.auth.In;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -107,6 +108,51 @@ public class EmployeeController {
         log.info("员工分页查询,参数为:{}", employeePageQueryDTO);
         PageResult pageResult = employeeService.pageQuery(employeePageQueryDTO);
         return Result.success(pageResult);
+    }
+
+
+    /**
+     * @description: 启用禁用员工账号
+     * @author: ChenXW
+     * @date: 2023/8/19 0:23
+     */
+    @ApiOperation("启用禁用员工账号")
+    @PostMapping("/status/{status}")
+    public Result startOrStop(@PathVariable Integer status, Long id) {
+
+        log.info("启用禁用员工账号，{}，{}", status, id);
+        employeeService.startOrStop(status, id);
+
+        return Result.success();
+    }
+
+
+    /**
+     * @description: 根据id查询员工信息
+     * @author: ChenXW
+     * @date: 2023/8/19 0:36
+     */
+    @GetMapping("/{id}")
+    @ApiOperation("根据id查询员工信息")
+    public Result<Employee> getById(@PathVariable Long id) {
+
+        Employee employee = employeeService.getById(id);
+
+        return Result.success(employee);
+    }
+
+
+    /**
+     * @description: 编辑员工信息
+     * @author: ChenXW
+     * @date: 2023/8/19 0:42
+     */
+    @PutMapping
+    @ApiOperation("编辑员工信息")
+    public Result update(@RequestBody EmployeeDTO employeeDTO) {
+        log.info("编辑员工信息:{}", employeeDTO);
+        employeeService.update(employeeDTO);
+        return Result.success();
     }
 
 }
