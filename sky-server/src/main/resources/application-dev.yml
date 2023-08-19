@@ -11,3 +11,7 @@ sky:
     access-key-id: LTAI5tCCK6DfMXZFPZxZB6qN
     access-key-secret: ZgBBhd015DUNAcMgCmM5ILHlkMvyR9
     bucket-name: tanhuacouldplatform
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
