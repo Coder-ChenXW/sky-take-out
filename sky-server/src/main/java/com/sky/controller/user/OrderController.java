@@ -100,4 +100,16 @@ public class OrderController {
         return Result.success();
     }
 
+    /**
+     * @description:
+     * @author: ChenXW
+     * @date: 2023/8/23 14:08
+     */
+    @GetMapping("/reminder/{id}")
+    @ApiOperation("客户催单")
+    public Result reminder(@PathVariable("id") Long id) {
+        orderService.reminder(id);
+        return Result.success();
+    }
+
 }
